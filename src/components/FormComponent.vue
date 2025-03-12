@@ -23,6 +23,7 @@ import { ref, reactive, computed, defineAsyncComponent, isProxy, toRaw, watch } 
 import fieldMixin from './FieldMixin';
 const emit = defineEmits(['update', 'formSubmit']);
 const fieldRefs = {};
+const fieldError = reactive([]);
 
 const props = defineProps({
     fieldDefinitions: {
@@ -34,7 +35,6 @@ const props = defineProps({
         default: () => ({}),
     }
 });
-let { handleChange, valueFromEvent } = fieldMixin.setup(props, { emit });
 
 let formData = toRaw(props.modelValue);
 
@@ -108,8 +108,9 @@ label {
         width: 100%;
         text-align: left;
     }
+
 }
-input, select, textarea {
+input, select, textarea, .customize-component {
     padding: 5px;
     width: 100%;
     margin-bottom: 10px;
@@ -129,5 +130,6 @@ input, select, textarea {
 .form-field {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 </style>
